@@ -1,0 +1,72 @@
+{% include doctype.html %}
+<head>
+{% include head.html %}
+</head>
+
+<body id="page" {% if page.image.feature %}class="feature"{% endif %}>
+
+{% include browser-upgrade.html %}
+{% include navigation.html %}
+
+{% if page.image.feature %}
+<div class="entry-header">
+  {% if page.image.credit %}<div class="image-credit">Image source: <a href="{{ page.image.creditlink }}">{{ page.image.credit }}</a></div><!-- /.image-credit -->{% endif %}
+  <div class="entry-image">
+    <img src="{{ page.image.feature }}" alt="{{ page.title }}">
+  </div><!-- /.entry-image -->
+</div><!-- /.entry-header -->
+{% endif %}
+
+<div id="main" role="main">
+  <article class="entry">
+    <header class="header-title">
+      <div class="header-title-wrap">
+        <h1 class="entry-title">{{ page.title }}</h1>
+      </div><!-- /.header-title-wrap -->
+    </header>
+    <div class="entry-content">
+      {{ content }}
+      <footer class="entry-meta">
+        {% if page.modified %}{{ page.title }} was last modified on <span class="entry-date date modified"><time datetime="{{ page.modified }}">{{ page.modified }}</time></span>
+        <span class="author vcard fn">{{ site.author }}</span>{% endif %}
+        {% if page.share %}<div class="social-share">
+          <div class="socialcount socialcount-small inline-list" data-url="{{ root_url }}/{{ page.url }}" data-share-text="{{ page.title }}">
+            <!-- <li class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u={{ root_url }}/{{ page.url }}" title="Share on Facebook"><span class="count"><i class="fa fa-facebook-square"></i> Like</span></a></li>
+            <li class="twitter"><a href="https://twitter.com/intent/tweet?text={{ root_url }}/{{ page.url }}" title="Share on Twitter"><span class="count"><i class="fa fa-twitter-square"></i> Tweet</span></a></li>
+            <li class="googleplus"><a href="https://plus.google.com/share?url={{ root_url }}/{{ page.url }}" title="Share on Google Plus"><span class="count"><i class="fa fa-google-plus-square"></i> +1</span></a></li> -->
+            <!-- <li class="sina"><a target="_blank" href="http://v.t.sina.com.cn/share/share.php?appkey=2992571369&urlhttp%3A%2F%2Ft.jiathis.com%2FCWy&title={{ page.title }}&source=bookmark&sourceUrl=http://blog.yuanxiaolong.cn{{ page.url }}&content=={{ page.title }}" title="Share on Twitter"><span class="count"><i class="fa fa-twitter-square"></i> Tweet</span></a></li> -->
+            <!-- 多说评论框 start -->
+            <div class="ds-thread" data-thread-key="{{ page.url }}" data-title="{{ page.title }}" data-url="http://blog.yuanxiaolong.cn{{ page.url }}"></div>
+            <!-- 多说评论框 end -->
+            <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+            <script type="text/javascript">
+            var duoshuoQuery = {short_name:"yuanxiaolong"};
+              (function() {
+                var ds = document.createElement('script');
+                ds.type = 'text/javascript';ds.async = true;
+                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                ds.charset = 'UTF-8';
+                (document.getElementsByTagName('head')[0]
+                 || document.getElementsByTagName('body')[0]).appendChild(ds);
+              })();
+              </script>
+            <!-- 多说公共JS代码 end -->
+        </div>
+        </div><!-- /.social-share -->{% endif %}
+      </footer>
+    </div><!-- /.entry-content -->
+    {% if site.disqus_short_name and page.comments %}<section id="disqus_thread"></section><!-- /#disqus_thread -->{% endif %}
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo">
+    {% include footer.html %}
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+{% include custom/after_footer.html %}
+{% include scripts.html %}
+
+</body>
+</html>
