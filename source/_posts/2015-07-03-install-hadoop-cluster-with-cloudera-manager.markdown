@@ -101,7 +101,11 @@ mysql> select user,host from mysql.user;
 6 rows in set (0.00 sec)
 ```
 
-5. 检查进程是否已启动
+5.检查进程是否已启动
+
+``` bash
+/etc/init.d/cloudera-scm-server start
+```
 
 ``` bash
 [root@hadoop1 yuanxiaolong]# ps -ef | grep cloudera
@@ -267,6 +271,15 @@ MetaException(message:javax.jdo.JDODataStoreException: You have an error in your
 
 通过hue查询hive，或提交Job 所用的账号名称，是需要在 linux 上真实存在的，hue仅仅是个UI，所有权限认证都是在 Linux 和 hadoop 之间完成的。所以如果hue的用户，在Linux上不存在，但又想
 操作hadoop，则需要用 ```adduser <yourname>``` 添加用户。
+
+#### <font color="#cca02e">问题四：新增节点无法加入到 hdfs 和 yarn 里</font>
+
+通常需要先在 CM 里执行 "重新授权" ，然后对应 hdfs 或 yarn 执行后，再重启
+
+```
+ hdfs dfsadmin -refreshNodes
+ yarn rmadmin -refreshNodes
+```
 
 ---
 

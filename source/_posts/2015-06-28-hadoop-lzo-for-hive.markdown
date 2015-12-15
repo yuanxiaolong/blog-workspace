@@ -209,6 +209,13 @@ echo "export SPARK_CLASSPATH=$SPARK_CLASSPATH:/usr/lib/hadoop/hadoop-lzo-0.4.20-
 source /etc/profile
 ```
 
+5.如果是通过 HUE 查询 hive 压缩表数据,则需要配置 HiveServer2 的环境变量, 我是通过 cloudera manager 管理的，所以在 "HiveServer2 环境高级配置代码段" 里配置即可。附cdh issue [地址](https://github.com/cloudera/hue/issues/204){:target="_blank"}
+
+```
+LD_LIBRARY_PATH=/usr/local/hadoop/lzo/lib
+```
+
+
 ---
 
 ## 压缩核心代码
